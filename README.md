@@ -37,34 +37,6 @@ gem 'virtus'
 Examples
 --------
 
-### Using Virtus with Classes
-
-You can create classes extended with Virtus and define attributes:
-
-``` ruby
-class User
-  include Virtus.model
-
-  attribute :name, String
-  attribute :age, Integer
-  attribute :birthday, DateTime
-end
-
-user = User.new(:name => 'Piotr', :age => 29)
-user.attributes # => { :name => "Piotr", :age => 29 }
-
-user.name # => "Piotr"
-
-user.age = '29' # => 29
-user.age.class # => Fixnum
-
-user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
-
-# mass-assignment
-user.attributes = { :name => 'Jane', :age => 21 }
-user.name # => "Jane"
-user.age  # => 21
-```
 
 ### Cherry-picking extensions
 
@@ -99,31 +71,6 @@ end
 
 user = User.new
 user.name = 'Piotr'
-```
-
-### Using Virtus with Modules
-
-You can create modules extended with Virtus and define attributes for later
-inclusion in your classes:
-
-```ruby
-module Name
-  include Virtus.module
-
-  attribute :name, String
-end
-
-module Age
-  include Virtus.module(:coerce => false)
-
-  attribute :age, Integer
-end
-
-class User
-  include Name, Age
-end
-
-user = User.new(:name => 'John', :age => 30)
 ```
 
 ### Dynamically Extending Instances
