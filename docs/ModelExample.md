@@ -28,6 +28,3 @@ user.attributes = { :name => 'Jane', :age => 21 }
 user.name # => "Jane"
 user.age  # => 21
 ```
-
-
-[Contents](_contents.md)

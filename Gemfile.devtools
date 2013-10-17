@@ -8,6 +8,7 @@ end
 
 group :yard do
   gem 'kramdown', '~> 1.2.0'
+  gem 'redcarpet'
 end
 
 group :guard do
