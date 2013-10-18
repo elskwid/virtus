@@ -27,14 +27,18 @@
 ### [Attribute Mass Assignment](AttributeMassAssignment.md)
 > Set object attributes using `#attribute=` with a hash of attribute names and values.
 
-### TODO: Coercion
+### [Attribute Coercion](AttributeCoercion.md)
+> Coerce attributue values to a specfied type.
 
-## Configuration
+## Configuring Virtus
 
-## Declaring Attributes
+### Global Configuration
 
-## Type Handling
+### Configurable Features
 
-## ValueObject
+### Configurable Modules
+
+## Coercion in Detail
+
 
 ## Use Cases / How-to

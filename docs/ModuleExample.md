@@ -1,4 +1,4 @@
-# Using Virtus in Modules
+# Using Virtus.module
 
 Include `Virtus.module` to create a module extened with Virtus. The extended module provides a way to define attributes for later inclusion in to other classes:
 
@@ -22,4 +22,10 @@ class User
 end
 
 user = User.new(:name => 'John', :age => 30)
+
+user.attributes
+# => { :name => "John", :age => 30 }
+
+user.name
+# => "John"
 ```

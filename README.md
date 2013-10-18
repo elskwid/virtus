@@ -38,6 +38,18 @@ Examples
 --------
 
 
+# coercion
+user.age = '29' # => 29
+user.age.class # => Fixnum
+
+user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+
+# mass-assignment
+user.attributes = { :name => 'Jane', :age => 21 }
+user.name # => "Jane"
+user.age  # => 21
+
+
 ### Cherry-picking extensions
 
 ``` ruby
@@ -87,43 +99,6 @@ user.extend(Virtus.model)
 user.attribute :name, String
 user.name = 'John'
 user.name # => 'John'
-```
-
-### Default Values
-
-``` ruby
-class Page
-  include Virtus.model
-
-  attribute :title, String
-
-  # default from a singleton value (integer in this case)
-  attribute :views, Integer, :default => 0
-
-  # default from a singleton value (boolean in this case)
-  attribute :published, Boolean, :default => false
-
-  # default from a callable object (proc in this case)
-  attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
-
-  # default from a method name as symbol
-  attribute :editor_title, String,  :default => :default_editor_title
-
-  def default_editor_title
-    published? ? title : "UNPUBLISHED: #{title}"
-  end
-end
-
-page = Page.new(:title => 'Virtus README')
-page.slug         # => 'virtus-readme'
-page.views        # => 0
-page.published    # => false
-page.editor_title # => "UNPUBLISHED: Virtus README"
-
-page.views = 10
-page.views                    # => 10
-page.reset_attribute(:views)  # => 0
-page.views                    # => 0
 ```
 
 ### Embedded Value
@@ -316,27 +291,6 @@ user = User.new(:scream => 'hello world!')
 user.scream # => "HELLO WORLD!"
 ```
 
-### Private Attributes
-
-``` ruby
-class User
-  include Virtus.model
-
-  attribute :unique_id, String, :writer => :private
-
-  def set_unique_id(id)
-    self.unique_id = id
-  end
-end
-
-user = User.new(:unique_id => '1234-1234')
-user.unique_id # => nil
-
-user.unique_id = '1234-1234' # => NoMethodError: private method `unique_id='
-
-user.set_unique_id('1234-1234')
-user.unique_id # => '1234-1234'
-```
 
 Coercions
 ---------

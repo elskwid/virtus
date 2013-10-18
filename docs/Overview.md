@@ -6,7 +6,7 @@ Virtus provides a flexible way to add model-like behavior to Ruby objects.
 
 Virtus features include an [attribute DSL](#), [constructor semantics](#), and [mass assignment of attributes](#). Typically, these features are mixed-in to Ruby classes or modules, and configured with the Virtus custom [builder extension interface](#).
 
-The builder interface was built with three main use cases in mind: Models, Modules, and Value Objects.
+The builder interface was built with three main use cases in mind: Models, Modules, and Value Objects. For a more in depth explanation of each see the "example" links below.
 
 ### Models
 
@@ -20,7 +20,7 @@ class MyModel
 end
 ```
 
-See [Model Example](ModelExample.md).
+See a full [Model Example](ModelExample.md).
 
 ### Modules
 
@@ -34,7 +34,7 @@ module MyModule
 end
 ```
 
-See [Module Example](ModuleExample.md).
+See a full [Module Example](ModuleExample.md).
 
 ### Value Objects
 
@@ -48,4 +48,4 @@ class MyValue
 end
 ```
 
-See [Value Object Example](ValueObjectExample.md).
+See a full [Value Object Example](ValueObjectExample.md).

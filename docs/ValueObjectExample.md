@@ -1,4 +1,6 @@
-### Value Objects
+### Using Virtus.value_object
+
+A Value Object can be created using `Virtus.value_object`. In Virtus, a value object is one that is immutable and compared based on state, rather than identity which is the usual case in Ruby.
 
 ``` ruby
 class GeoLocation
@@ -10,27 +12,44 @@ class GeoLocation
   end
 end
 
-class Venue
-  include Virtus.value_object
+location = GeoLocation.new(
+  :latitude => 37.160317,
+  :longitude => -98.437500
+)
 
-  values do
-    attribute :name,     String
-    attribute :location, GeoLocation
-  end
-end
+location.latitude
+# => 37.160317
 
-venue = Venue.new(
-  :name     => 'Pub',
-  :location => { :latitude => 37.160317, :longitude => -98.437500 })
+location.longitude
+# => -98.4375
+```
 
-venue.location.latitude # => 37.160317
-venue.location.longitude # => -98.4375
+Value objects are "immutable":
 
-# Supports object's equality
+```ruby
+location.latitude = 38
+# => NoMethodError: private method `latitude=' called for #<GeoLocation latitude=37.160317 longitude=-98.4375>
+```
 
-venue_other = Venue.new(
-  :name     => 'Other Pub',
-  :location => { :latitude => 37.160317, :longitude => -98.437500 })
+Value objects support object equality based on state:
 
-venue.location === venue_other.location # => true
+```ruby
+other_location = GeoLocation.new(
+  :latitude => 37.160317,
+  :longitude => -98.437500
+)
+
+location === other_location
+# => true
+```
+
+Cloning a value object retains the value (actually returning the same value object instance):
+
+```ruby
+cloned_location = location.clone
+location.eql? cloned_location
+# => true
+
+location.object_id == cloned_location.object_id
+# => true
 ```
